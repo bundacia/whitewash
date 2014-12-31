@@ -9,6 +9,16 @@ A Clojure library designed to encode text as whitespace. Inspired by [ACME::Blea
     user=> (unwash (wash "text"))
     "text"
 
+## Command Line Tool
+
+Examples:
+
+    % WASHED=`lein run wash "text"`
+    % echo -n "$WASHED" | lein run unwash
+    text
+
+Both commands will accept input as the second argument or from STDIN.
+
 ## License
 
 Whitewash is released under the [MIT License](http://www.opensource.org/licenses/MIT).
