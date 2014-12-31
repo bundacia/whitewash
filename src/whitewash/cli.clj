@@ -7,10 +7,14 @@
   (:gen-class))
 
 (defn get_function [name]
-  (let [function (ns-resolve 'whitewash.callable_actions (symbol name))]
-    (fn [args] (apply function args))))
+  (ns-resolve 'whitewash.callable_actions (symbol name)))
+
+(defn run
+  [action_name & args]
+  (let [action (get_function action_name)
+        input  (if (empty? args) (slurp *in*) (first args))]
+    (action input)))
 
 (defn -main
-  [action_name & input]
-  (let [action (get_function action_name)]
-    (println (action input))))
+  [& args]
+    (println (apply run args)))
